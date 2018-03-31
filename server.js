@@ -11,8 +11,9 @@ var server = net.createServer(function(socket) {
     console.log(new Date() + "Client connected: " + socket.remoteAddress);
 
     socket.on('data', function (data) {
-        var re = /\(([0-9]{12})BR00([0-9]{2})([0-9]{2})([0-9]{2})([AV])([0-9]{2})([0-9]{2}\.[0-9]{4})([NS])([0-9]{3})([0-9]{2}\.[0-9]{4})([EW])([0-9]{3}\.[0-9])([0-9]{2})([0-9]{2})([0-9]{3}\.[0-9]{12}L[0-9]{8}).*\)/;
+        var re = /\(([0-9]{12})BR00([0-9]{2})([0-9]{2})([0-9]{2})([AV])([0-9]{2})([0-9]{2}\.[0-9]{4})([NS])([0-9]{3})([0-9]{2}\.[0-9]{4})([EW])([0-9]{3}\.[0-9])([0-9]{2})([0-9]{2}).*\)/;
         var m;
+        data = data.toString('utf-8');
         if ((m = re.exec(data)) !== null) {
             if (m.index === re.lastIndex) {
                 re.lastIndex++;
